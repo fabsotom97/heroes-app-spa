@@ -6,6 +6,8 @@ import { HeroGrid } from "@/heroes/components/HeroGrid";
 import { useState } from "react";
 import { CustomPagination } from "@/components/custom/CustomPagination";
 import { CustomBreadcrumbs } from "@/components/custom/CustomBreadcrumbs";
+import { useQuery } from "@tanstack/react-query";
+import { getHeroesByPageAction } from "@/heroes/actions/get-heroes-by-page.action";
 
 type TabOption = 'all' | 'favorites' | 'heroes' | 'villains';
 
@@ -13,6 +15,11 @@ export const HomePage = () => {
 
   const [activeTab, setActiveTab] = useState<TabOption>('all');
 
+  const { data: heroesResponse, isLoading } = useQuery({
+    queryKey: ['heroes'],
+    queryFn: () => getHeroesByPageAction(),
+    staleTime: 1000 * 60 * 5, // 5 min cache
+  });
 
   return (
     <>
@@ -59,23 +66,23 @@ export const HomePage = () => {
 
           <TabsContent value="all">
             <h1>All Characters</h1>
-            <HeroGrid />
+            <HeroGrid heroes={heroesResponse?.heroes || []} />
           </TabsContent>
           <TabsContent value="favorites">
             <h1>Favorites</h1>
-            <HeroGrid />
+            <HeroGrid heroes={[]} />
           </TabsContent>
           <TabsContent value="heroes">
             <h1>Heroes</h1>
-            <HeroGrid />
+            <HeroGrid heroes={[]} />
           </TabsContent>
           <TabsContent value="villains">
             <h1>Villains</h1>
-            <HeroGrid />
+            <HeroGrid heroes={[]} />
           </TabsContent>
         </Tabs>
 
-        <CustomPagination />
+        {/* <CustomPagination /> */}
       </>
     </>
   )
