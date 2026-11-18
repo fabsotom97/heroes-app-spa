@@ -17,9 +17,14 @@ export const HomePage = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const tabParam = searchParams.get('tab');
+  // not validated!
+  const pageParam = searchParams.get('page') ?? '1';
+  const limitParam = searchParams.get('limit') ?? '6';
+
   const { data: heroesResponse, isLoading } = useQuery({
     queryKey: ['heroes'],
-    queryFn: () => getHeroesByPageAction(),
+    queryFn: () => getHeroesByPageAction(+pageParam, +limitParam),
     staleTime: 1000 * 60 * 5, // 5 min cache
   });
 
@@ -32,7 +37,6 @@ export const HomePage = () => {
 
   const heroes = heroesResponse?.heroes || [];
 
-  const tabParam = searchParams.get('tab');
   // validation solution suggested by Gemini
   const activeTab: TabOption = (VALID_TABS as readonly string[]).includes(tabParam as string)
     ? (tabParam as TabOption)
