@@ -4,12 +4,20 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Brain, Eye, Gauge, Heart, Shield, Zap } from "lucide-react";
 import type { Hero } from "../models/hero.interface";
+import { useNavigate } from "react-router";
 
 interface HeroGridCardProps {
     hero: Hero;
 }
 
 export const HeroGridCard = ({ hero }: HeroGridCardProps) => {
+
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(`/heroes/${hero.slug}`)
+    }
+
     return (
         <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
             <div className="relative h-64 overflow-hidden">
@@ -40,6 +48,7 @@ export const HeroGridCard = ({ hero }: HeroGridCardProps) => {
                     size="sm"
                     variant="ghost"
                     className="absolute bottom-3 left-3 bg-white/90 hover:bg-white opacity-0 group-hover:opacity-100 transition-opacity"
+                    onClick={handleClick}
                 >
                     <Eye className="h-4 w-4 text-gray-600" />
                 </Button>
