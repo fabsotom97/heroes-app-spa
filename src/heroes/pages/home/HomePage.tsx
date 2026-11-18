@@ -23,7 +23,7 @@ export const HomePage = () => {
   const limitParam = searchParams.get('limit') ?? '6';
 
   const { data: heroesResponse, isLoading } = useQuery({
-    queryKey: ['heroes'],
+    queryKey: ['heroes', { page: pageParam, limit: limitParam }],
     queryFn: () => getHeroesByPageAction(+pageParam, +limitParam),
     staleTime: 1000 * 60 * 5, // 5 min cache
   });
