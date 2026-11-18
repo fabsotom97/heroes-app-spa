@@ -25,10 +25,11 @@ export const CustomNavigationMenu = ({ items }: CustomNavigationMenuProps) => {
         <NavigationMenu>
             <NavigationMenuList>
                 {items.map(item => (
-                    <NavigationMenuItem>
-                        <NavigationMenuLink className={cn(isActive(item.path) && 'bg-slate-200 rounded-md p-2')}>
-                            <Link to={item.path}>{item.label}</Link>
-                        </NavigationMenuLink>
+                    <NavigationMenuItem key={item.path}>
+                        <NavigationMenuLink
+                            className={cn(isActive(item.path) && 'bg-slate-200 rounded-md p-2')}
+                            render={<Link to={item.path}>{item.label}</Link>}
+                        />
                     </NavigationMenuItem>
                 ))}
             </NavigationMenuList>
