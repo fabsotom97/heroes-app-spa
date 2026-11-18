@@ -8,6 +8,7 @@ import { CustomBreadcrumbs } from "@/components/custom/CustomBreadcrumbs";
 import { useQuery } from "@tanstack/react-query";
 import { getHeroesByPageAction } from "@/heroes/actions/get-heroes-by-page.action";
 import { useSearchParams } from "react-router";
+import { useHeroSummary } from "@/heroes/hooks/useHeroSummary";
 
 const VALID_TABS = ['all', 'favorites', 'heroes', 'villains'] as const;
 
@@ -22,7 +23,9 @@ export const HomePage = () => {
   const pageParam = searchParams.get('page') ?? '1';
   const limitParam = searchParams.get('limit') ?? '6';
 
-  const { data: heroesResponse, isLoading } = useQuery({
+  const { data: summaryResponse } = useHeroSummary();
+
+  const { data: heroesResponse } = useQuery({
     queryKey: ['heroes', { page: pageParam, limit: limitParam }],
     queryFn: () => getHeroesByPageAction(+pageParam, +limitParam),
     staleTime: 1000 * 60 * 5, // 5 min cache
@@ -62,7 +65,7 @@ export const HomePage = () => {
               value="all"
               onClick={() => handleTabClick('all')}
             >
-              All Characters (16)
+              All Characters ({summaryResponse?.totalHeroes})
             </TabsTrigger>
             <TabsTrigger
               value="favorites"
@@ -75,13 +78,13 @@ export const HomePage = () => {
               value="heroes"
               onClick={() => handleTabClick('heroes')}
             >
-              Heroes (12)
+              Heroes ({summaryResponse?.heroCount})
             </TabsTrigger>
             <TabsTrigger
               value="villains"
               onClick={() => handleTabClick('villains')}
             >
-              Villains (2)
+              Villains ({summaryResponse?.villainCount})
             </TabsTrigger>
           </TabsList>
 

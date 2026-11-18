@@ -1,8 +1,12 @@
 import { Badge } from "@/components/ui/badge";
 import { Heart, Trophy, Users, Zap } from "lucide-react";
 import { HeroStatCard } from "./HeroStatCard";
+import { useHeroSummary } from "../hooks/useHeroSummary";
 
 export const HeroStats = () => {
+
+    const { data: summaryResponse } = useHeroSummary();
+
     return (
         <>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -10,13 +14,13 @@ export const HeroStats = () => {
                     title="Total Characters"
                     icon={<Users className="h-4 w-4 text-muted-foreground" />}
                     content={<>
-                        <div className="text-2xl font-bold">16</div>
+                        <div className="text-2xl font-bold">{summaryResponse?.totalHeroes}</div>
                         <div className="flex gap-1 mt-2">
                             <Badge variant="secondary" className="text-xs">
-                                12 Heroes
+                                {summaryResponse?.heroCount} Heroes
                             </Badge>
                             <Badge variant="destructive" className="text-xs">
-                                2 Villains
+                                {summaryResponse?.villainCount} Villains
                             </Badge>
                         </div>
                     </>}
@@ -34,8 +38,10 @@ export const HeroStats = () => {
                     title="Strongest"
                     icon={<Zap className="h-4 w-4 text-muted-foreground" />}
                     content={<>
-                        <div className="text-lg font-bold">Superman</div>
-                        <p className="text-xs text-muted-foreground">Strength: 10/10</p>
+                        <div className="text-lg font-bold">{summaryResponse?.strongestHero.name}</div>
+                        <p className="text-xs text-muted-foreground">
+                            Strength: {summaryResponse?.strongestHero.strength}/10
+                        </p>
                     </>}
                 />
 
@@ -43,8 +49,10 @@ export const HeroStats = () => {
                     title="Smartest"
                     icon={<Trophy className="h-4 w-4 text-muted-foreground" />}
                     content={<>
-                        <div className="text-lg font-bold">Batman</div>
-                        <p className="text-xs text-muted-foreground">Intelligence: 10/10</p>
+                        <div className="text-lg font-bold">{summaryResponse?.smartestHero.name}</div>
+                        <p className="text-xs text-muted-foreground">
+                            Intelligence: {summaryResponse?.smartestHero.intelligence}/10
+                        </p>
                     </>} />
             </div>
         </>
