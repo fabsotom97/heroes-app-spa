@@ -9,7 +9,9 @@ import { useQuery } from "@tanstack/react-query";
 import { getHeroesByPageAction } from "@/heroes/actions/get-heroes-by-page.action";
 import { useSearchParams } from "react-router";
 
-type TabOption = 'all' | 'favorites' | 'heroes' | 'villains';
+const VALID_TABS = ['all', 'favorites', 'heroes', 'villains'] as const;
+
+type TabOption = typeof VALID_TABS[number];
 
 export const HomePage = () => {
 
@@ -29,7 +31,12 @@ export const HomePage = () => {
   }
 
   const heroes = heroesResponse?.heroes || [];
-  const activeTab: TabOption = searchParams.get('tab') as TabOption ?? 'all';
+
+  const tabParam = searchParams.get('tab');
+  // validation solution suggested by Gemini
+  const activeTab: TabOption = (VALID_TABS as readonly string[]).includes(tabParam as string)
+    ? (tabParam as TabOption)
+    : 'all';
 
   return (
     <>
