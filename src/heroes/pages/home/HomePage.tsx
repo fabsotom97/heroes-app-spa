@@ -5,10 +5,9 @@ import { SearchControls } from "@/heroes/components/SearchControls";
 import { HeroGrid } from "@/heroes/components/HeroGrid";
 import { CustomPagination } from "@/components/custom/CustomPagination";
 import { CustomBreadcrumbs } from "@/components/custom/CustomBreadcrumbs";
-import { useQuery } from "@tanstack/react-query";
-import { getHeroesByPageAction } from "@/heroes/actions/get-heroes-by-page.action";
 import { useSearchParams } from "react-router";
 import { useHeroSummary } from "@/heroes/hooks/useHeroSummary";
+import { usePaginatedHeroes } from "@/heroes/hooks/usePaginatedHeroes";
 
 const VALID_TABS = ['all', 'favorites', 'heroes', 'villains'] as const;
 
@@ -24,12 +23,7 @@ export const HomePage = () => {
   const limitParam = searchParams.get('limit') ?? '6';
 
   const { data: summaryResponse } = useHeroSummary();
-
-  const { data: heroesResponse } = useQuery({
-    queryKey: ['heroes', { page: pageParam, limit: limitParam }],
-    queryFn: () => getHeroesByPageAction(+pageParam, +limitParam),
-    staleTime: 1000 * 60 * 5, // 5 min cache
-  });
+  const { data: heroesResponse } = usePaginatedHeroes(+pageParam, +limitParam);
 
   const handleTabClick = (tab: TabOption) => {
     setSearchParams(prev => {
