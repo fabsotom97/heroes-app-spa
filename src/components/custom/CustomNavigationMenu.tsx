@@ -3,31 +3,16 @@ import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuL
 import { cn } from "@/lib/utils";
 
 
-interface NavigationItem {
+export interface NavigationItem {
     path: string;
     label: string;
 }
 
-const items: NavigationItem[] = [
-    {
-        path: '/',
-        label: 'Home',
-    },
-    {
-        path: '/heroes/1',
-        label: 'Hero',
-    },
-    {
-        path: '/search',
-        label: 'Search',
-    },
-    {
-        path: '/admin',
-        label: 'Admin',
-    },
-];
+interface CustomNavigationMenuProps {
+    items: NavigationItem[];
+}
 
-export const CustomNavigationMenu = () => {
+export const CustomNavigationMenu = ({ items }: CustomNavigationMenuProps) => {
 
     const { pathname } = useLocation();
 
