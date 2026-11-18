@@ -1,29 +1,5 @@
 import { CustomNavigationMenu } from "@/components/custom/CustomNavigationMenu";
-import { Link, Outlet } from "react-router";
-
-interface RouteLink {
-    path: string;
-    label: string;
-}
-
-const links: RouteLink[] = [
-    {
-        path: '/',
-        label: 'Home',
-    },
-    {
-        path: '/heroes/1',
-        label: 'Hero',
-    },
-    {
-        path: 'search',
-        label: 'Search',
-    },
-    {
-        path: '/admin',
-        label: 'Admin',
-    },
-];
+import { Outlet } from "react-router";
 
 export const HeroesLayout = () => {
     return (
