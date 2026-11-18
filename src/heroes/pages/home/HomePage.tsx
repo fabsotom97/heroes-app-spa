@@ -1,32 +1,26 @@
 import {
-  Search,
-  Plus,
   Filter,
-  SortAsc,
   Heart,
-  Grid,
-  Users,
-  Zap,
-  Trophy,
-  Eye,
-  Brain,
-  Gauge,
-  Shield,
   ChevronLeft,
   ChevronRight,
   MoreHorizontal,
 } from "lucide-react"
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Jumbotron } from "@/components/custom/Jumbotron";
 import { HeroStats } from "@/heroes/components/HeroStats";
 import { SearchControls } from "@/heroes/components/SearchControls";
 import { HeroGrid } from "@/heroes/components/HeroGrid";
+import { useState } from "react";
+
+type TabOption = 'all' | 'favorites' | 'heroes' | 'villains';
 
 export const HomePage = () => {
+
+  const [activeTab, setActiveTab] = useState<TabOption>('all');
+
+
   return (
     <>
       <>
@@ -39,31 +33,52 @@ export const HomePage = () => {
 
         <SearchControls />
 
-        {/* Tabs */}
-        <Tabs value="all" className="mb-8">
+        <Tabs value={activeTab} className="mb-8">
           <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="all">All Characters (16)</TabsTrigger>
-            <TabsTrigger value="favorites" className="flex items-center gap-2">
-              <Heart className="h-4 w-4" />
+            <TabsTrigger
+              value="all"
+              onClick={() => setActiveTab('all')}
+            >
+              All Characters (16)
+            </TabsTrigger>
+            <TabsTrigger
+              value="favorites"
+              className="flex items-center gap-2"
+              onClick={() => setActiveTab('favorites')}
+            >
               Favorites (3)
             </TabsTrigger>
-            <TabsTrigger value="heroes">Heroes (12)</TabsTrigger>
-            <TabsTrigger value="villains">Villains (2)</TabsTrigger>
+            <TabsTrigger
+              value="heroes"
+              onClick={() => setActiveTab('heroes')}
+            >
+              Heroes (12)
+            </TabsTrigger>
+            <TabsTrigger
+              value="villains"
+              onClick={() => setActiveTab('villains')}
+            >
+              Villains (2)
+            </TabsTrigger>
           </TabsList>
+
+          <TabsContent value="all">
+            <h1>All Characters</h1>
+            <HeroGrid />
+          </TabsContent>
+          <TabsContent value="favorites">
+            <h1>Favorites</h1>
+            <HeroGrid />
+          </TabsContent>
+          <TabsContent value="heroes">
+            <h1>Heroes</h1>
+            <HeroGrid />
+          </TabsContent>
+          <TabsContent value="villains">
+            <h1>Villains</h1>
+            <HeroGrid />
+          </TabsContent>
         </Tabs>
-
-        {/* Results info */}
-        <div className="flex justify-between items-center mb-6">
-          <div className="flex items-center gap-4">
-            <p className="text-gray-600">Showing 6 of 16 characters</p>
-            <Badge variant="secondary" className="flex items-center gap-1">
-              <Filter className="h-3 w-3" />
-              Filtered
-            </Badge>
-          </div>
-        </div>
-
-        <HeroGrid />
 
         {/* Pagination */}
         <div className="flex items-center justify-center space-x-2">
