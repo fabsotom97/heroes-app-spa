@@ -1,5 +1,5 @@
 import { heroApi } from "../api/hero.api";
-import type { HeroesResponse } from "../models/get-heroes-response";
+import type { HeroesResponse } from "../models/get-heroes.response";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
