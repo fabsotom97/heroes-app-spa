@@ -14,6 +14,7 @@ import { SearchControls } from "@/heroes/components/SearchControls";
 import { HeroGrid } from "@/heroes/components/HeroGrid";
 import { useState } from "react";
 import { CustomPagination } from "@/components/custom/CustomPagination";
+import { CustomBreadcrumbs } from "@/components/custom/CustomBreadcrumbs";
 
 type TabOption = 'all' | 'favorites' | 'heroes' | 'villains';
 
@@ -29,6 +30,8 @@ export const HomePage = () => {
           title="Superhero Universe"
           description="Discover, explore, and manage your favorite superheroes and villains"
         />
+
+        <CustomBreadcrumbs currentPage="Superheroes" />
 
         <HeroStats />
 
