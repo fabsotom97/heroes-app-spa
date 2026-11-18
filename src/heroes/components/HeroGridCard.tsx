@@ -20,12 +20,12 @@ export const HeroGridCard = ({ hero }: HeroGridCardProps) => {
                 />
 
                 {/* Status indicator */}
-                {/* <div className="absolute top-3 left-3 flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-green-500" />
+                <div className="absolute top-3 left-3 flex items-center gap-2">
+                    <div className={`w-3 h-3 rounded-full ${hero.status === 'Active' ? 'bg-green-500' : 'bg-slate-500'}`} />
                     <Badge variant="secondary" className="text-xs bg-white/90 text-gray-700">
-                        Active
+                        {hero.status}
                     </Badge>
-                </div> */}
+                </div>
 
                 {/* Universe badge */}
                 <Badge className="absolute top-3 right-3 text-xs bg-blue-600 text-white">{hero.universe}</Badge>

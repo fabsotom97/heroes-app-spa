@@ -1,3 +1,9 @@
+export type HeroCategory = 'Hero' | 'Villain';
+
+export type HeroUniverse = 'DC' | 'Marvel';
+
+export type HeroStatus = 'Active' | 'Deceased';
+
 export interface Hero {
     id: string;
     name: string;
@@ -12,7 +18,7 @@ export interface Hero {
     team: string;
     image: string;
     firstAppearance: string;
-    status: string;
-    category: string;
-    universe: string;
+    status: HeroStatus;
+    category: HeroCategory;
+    universe: HeroUniverse;
 }
