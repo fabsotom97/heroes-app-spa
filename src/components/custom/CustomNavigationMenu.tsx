@@ -1,5 +1,6 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "../ui/navigation-menu";
+import { cn } from "@/lib/utils";
 
 
 interface NavigationItem {
@@ -17,7 +18,7 @@ const items: NavigationItem[] = [
         label: 'Hero',
     },
     {
-        path: 'search',
+        path: '/search',
         label: 'Search',
     },
     {
@@ -27,12 +28,20 @@ const items: NavigationItem[] = [
 ];
 
 export const CustomNavigationMenu = () => {
+
+    const { pathname } = useLocation();
+
+    const isActive = (path: string) => {
+        // not working with nested paths like '/hero/1'
+        return pathname === path;
+    }
+
     return (
         <NavigationMenu>
             <NavigationMenuList>
                 {items.map(item => (
                     <NavigationMenuItem>
-                        <NavigationMenuLink>
+                        <NavigationMenuLink className={cn(isActive(item.path) && 'bg-slate-200 rounded-md p-2')}>
                             <Link to={item.path}>{item.label}</Link>
                         </NavigationMenuLink>
                     </NavigationMenuItem>
