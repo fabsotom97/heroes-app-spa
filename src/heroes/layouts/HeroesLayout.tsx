@@ -8,10 +8,6 @@ const items: NavigationItem[] = [
         label: 'Home',
     },
     {
-        path: '/heroes/1',
-        label: 'Hero',
-    },
-    {
         path: '/search',
         label: 'Search',
     },
