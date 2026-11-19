@@ -1,7 +1,7 @@
 import { heroApi } from "../api/hero.api";
 import type { HeroesResponse } from "../models/get-heroes.response";
+import { mapHero } from "../models/hero.mapper";
 
-const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const getHeroesByPageAction = async (
     page: number,
@@ -25,13 +25,7 @@ export const getHeroesByPageAction = async (
         }
     });
 
-    const heroes = data.heroes.map((hero) => ({
-        ...hero,
-        // instead of receiving just the '4.jpeg'
-        // transform the data into the full URL of the image
-        // for easier read in the component side
-        image: `${BASE_URL}/images/${hero.image}`
-    }));
+    const heroes = data.heroes.map(mapHero);
 
     return {
         ...data,
