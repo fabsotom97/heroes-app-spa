@@ -13,7 +13,7 @@ export const FavoriteHeroesContext = createContext({} as FavoriteHeroesContext);
 const getFavoritesFromLocalStorage = (): Hero[] => {
     const item = localStorage.getItem('favorites');
     // should validate with zod
-    return item ? JSON.parse('favorites') : [];
+    return item ? JSON.parse(item) : [];
 }
 
 export const FavoriteHeroesContextProvider = ({ children }: PropsWithChildren) => {
