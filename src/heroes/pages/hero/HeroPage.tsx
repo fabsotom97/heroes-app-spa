@@ -6,17 +6,25 @@ import { HeroPowerComparisonChart } from "@/heroes/components/HeroPowerCompariso
 import { useHero } from "@/heroes/hooks/useHero";
 import type { HeroCategory, HeroStatus } from "@/heroes/models/hero.interface";
 import { Shield, Zap, Brain, Gauge, Users, Star, Award } from "lucide-react"
-import { useParams } from "react-router";
+import { Navigate, useParams } from "react-router";
 
 
 export const HeroPage = () => {
 
   const { slug = '' } = useParams();
 
-  const { data: heroResponse } = useHero(slug);
+  const { data: heroResponse, isLoading, isError, } = useHero(slug);
+
+  if (isError) {
+    return <Navigate to='/' />;
+  }
+
+  if (isLoading) {
+    return (<h3>Loading...</h3>);
+  }
 
   if (!heroResponse) {
-    return (<h3>Loading...</h3>);
+    return <Navigate to='/' />
   }
 
   const totalPower = heroResponse.strength + heroResponse.intelligence
