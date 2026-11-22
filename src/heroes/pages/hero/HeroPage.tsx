@@ -1,6 +1,5 @@
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { HeroPageStatsCard } from "@/heroes/components/HeroPageStatsCard";
 import { HeroPowerComparisonChart } from "@/heroes/components/HeroPowerComparisonChart";
@@ -161,6 +160,7 @@ export const HeroPage = () => {
 
             {/* Power Comparison Chart */}
             <HeroPowerComparisonChart hero={heroResponse} />
+
           </TabsContent>
 
           <TabsContent value="powers">
@@ -196,7 +196,7 @@ export const HeroPage = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Users className="w-6 h-6 text-green-500" />
-                  Afiliación de Equipo
+                  Team
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -205,7 +205,6 @@ export const HeroPage = () => {
                     <Users className="w-12 h-12 text-green-600" />
                   </div>
                   <h3 className="text-2xl font-bold text-green-700 mb-2">{heroResponse.team}</h3>
-                  <p className="text-gray-600">Miembro activo del equipo de superhéroes más poderoso</p>
                 </div>
               </CardContent>
             </Card>
@@ -215,11 +214,11 @@ export const HeroPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Detalles Personales</CardTitle>
+                  <CardTitle>Personal information</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex justify-between items-center py-2 border-b">
-                    <span className="text-gray-600">Nombre Real:</span>
+                    <span className="text-gray-600">Real name:</span>
                     <span className="font-semibold">{heroResponse.name}</span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b">
@@ -227,13 +226,13 @@ export const HeroPage = () => {
                     <span className="font-semibold">{heroResponse.alias}</span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b">
-                    <span className="text-gray-600">Categoría:</span>
+                    <span className="text-gray-600">Category:</span>
                     <Badge className={`${getCategoryColor(heroResponse.category)} text-white`}>
                       {heroResponse.category}
                     </Badge>
                   </div>
                   <div className="flex justify-between items-center py-2">
-                    <span className="text-gray-600">Estado:</span>
+                    <span className="text-gray-600">Status:</span>
                     <Badge className={`${getStatusColor(heroResponse.status)} text-white`}>
                       {heroResponse.status}
                     </Badge>
@@ -243,21 +242,21 @@ export const HeroPage = () => {
 
               <Card>
                 <CardHeader>
-                  <CardTitle>Información del Universo</CardTitle>
+                  <CardTitle>Universe information</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex justify-between items-center py-2 border-b">
-                    <span className="text-gray-600">Universo:</span>
+                    <span className="text-gray-600">Universe:</span>
                     <span className="font-semibold">{heroResponse.universe}</span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b">
-                    <span className="text-gray-600">Primera Aparición:</span>
+                    <span className="text-gray-600">First appearance:</span>
                     <span className="font-semibold">{heroResponse.firstAppearance}</span>
                   </div>
                   <div className="flex justify-between items-center py-2">
-                    <span className="text-gray-600">Años Activo:</span>
+                    <span className="text-gray-600">Active years:</span>
                     <span className="font-semibold">
-                      {new Date().getFullYear() - Number.parseInt(heroResponse.firstAppearance)} años
+                      {new Date().getFullYear() - Number.parseInt(heroResponse.firstAppearance)} years
                     </span>
                   </div>
                 </CardContent>
