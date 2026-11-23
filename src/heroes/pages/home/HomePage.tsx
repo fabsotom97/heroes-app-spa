@@ -1,7 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Jumbotron } from "@/components/custom/Jumbotron";
 import { HeroStats } from "@/heroes/components/HeroStats";
-import { SearchControls } from "@/heroes/components/SearchControls";
 import { HeroGrid } from "@/heroes/components/HeroGrid";
 import { CustomPagination } from "@/components/custom/CustomPagination";
 import { CustomBreadcrumbs } from "@/components/custom/CustomBreadcrumbs";
@@ -62,8 +61,6 @@ export const HomePage = () => {
         <CustomBreadcrumbs currentPage="Superheroes" />
 
         <HeroStats />
-
-        <SearchControls />
 
         <Tabs value={activeTab} className="mb-8">
           <TabsList className="grid w-full grid-cols-4">
