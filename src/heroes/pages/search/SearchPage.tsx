@@ -1,5 +1,6 @@
 import { CustomBreadcrumbs } from "@/components/custom/CustomBreadcrumbs";
 import { Jumbotron } from "@/components/custom/Jumbotron";
+import { HeroStats } from "@/heroes/components/HeroStats";
 import { SearchControls } from "@/heroes/components/SearchControls";
 
 export const SearchPage = () => {
@@ -11,6 +12,8 @@ export const SearchPage = () => {
       />
 
       <CustomBreadcrumbs currentPage="Search" />
+
+      <HeroStats />
 
       <SearchControls />
     </>
