@@ -10,10 +10,10 @@ export const SearchControls = () => {
     const searchInputRef = useRef<HTMLInputElement>(null);
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const nameParam = searchParams.get('name') ?? '';
+    const nameParam = searchParams.get('name');
     //const pageParam = searchParams.get('page') ?? '1';
     //const limitParam = searchParams.get('limit') ?? '6';
-    const categoryParam = searchParams.get('category') ?? 'all';
+    //const categoryParam = searchParams.get('category');
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
@@ -34,7 +34,7 @@ export const SearchControls = () => {
                         className="pl-12 h-12 text-lg bg-white"
                         ref={searchInputRef}
                         onKeyDown={handleKeyDown}
-                        defaultValue={nameParam}
+                        defaultValue={nameParam || ''}
                     />
                 </div>
 
